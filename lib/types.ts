@@ -86,7 +86,8 @@ export type GameMessage =
   | { type: 'question:revealed' }
   | { type: 'round:advanced' }
   | { type: 'game:ended' }
-  | { type: 'state:update'; state: Partial<GameRoom> }
+  | { type: 'state:request' }
+  | { type: 'state:update'; state: Partial<GameRoom> | GameRoom }
   | { type: 'admin:jump-round'; round: number }
   | { type: 'admin:jump-question'; question: number }
   | { type: 'admin:set-coins'; host: number; guest: number }
