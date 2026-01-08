@@ -63,7 +63,7 @@ export default function GameBoard({ gameState, role, sendMessage }: GameBoardPro
   }
 
   // Race and Scattergories rounds don't need questions
-  const roundType = currentRound.type;
+  const roundType: RoundType = currentRound.type as RoundType;
   if (roundType === 'race' || roundType === 'scattergories') {
     return (
       <div className="min-h-screen py-8 px-4">
