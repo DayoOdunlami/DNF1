@@ -56,94 +56,229 @@ export const rounds: Round[] = [
     type: "video",
     questions: [
       {
-        title: "Silverstone 2021 - Hamilton vs Verstappen",
-        description: "Lap 1, Copse Corner - these two are wheel to wheel...",
-        videoId: "6xVT8XiUbr4",
-        startTime: 0,
-        pauseTime: 8,
+        title: "Formula Ford Havoc Crash",
+        description: "A Formula Ford car enters a tight corner.",
+        videoId: "lblsowacHmY",
+        startTime: 65,
+        pauseTime: 75,
         options: [
-          "Both drivers make it through cleanly",
-          "Verstappen forces Hamilton off track",
-          "They collide and Verstappen crashes out",
-          "Hamilton backs out and loses position"
+          "It makes it through cleanly",
+          "It spins and recovers",
+          "It hits the barrier",
+          "It gets airborne"
         ],
         correct: 2,
-        hint: "This became one of the most controversial moments of the season"
+        hint: "Too much speed for the angle."
       },
       {
-        title: "Abu Dhabi 2021 - Final Lap Drama",
-        description: "Safety car restart, final lap. Verstappen on fresh softs, Hamilton on old hards...",
-        videoId: "cLp4nqFxfDw",
-        startTime: 0,
-        pauseTime: 10,
+        title: "WRC Top Co-Driver Moments",
+        description: "A co-driver shouts instructions on a fast stage.",
+        videoId: "3QltBMb9MXI",
+        startTime: 30,
+        pauseTime: 45,
         options: [
-          "Hamilton holds on to win the championship",
-          "Verstappen overtakes and wins his first title",
-          "They collide on the final lap",
-          "The race is red flagged"
+          "Perfect pace notes",
+          "Notes completely wrong",
+          "Driver ignores instructions",
+          "They spin out"
         ],
         correct: 1,
-        hint: "This moment changed F1 history forever"
+        hint: "Chaos in the notes."
       },
       {
-        title: "Germany 2019 - Chaos at Hockenheim",
-        description: "Wet conditions, Lewis Hamilton is leading but heading into the stadium section...",
-        videoId: "wTJX8X6cVmA",
-        startTime: 0,
-        pauseTime: 6,
+        title: "NASCAR's Funniest Moments",
+        description: "A Cup Series driver approaches pit lane unusually.",
+        videoId: "4pIh-SXBaIU",
+        startTime: 70,
+        pauseTime: 85,
         options: [
-          "Hamilton extends his lead",
-          "Hamilton spins into the gravel but recovers",
-          "Hamilton crashes out of the race",
-          "Safety car is deployed"
-        ],
-        correct: 1,
-        hint: "Even the best make mistakes in the wet"
-      },
-      {
-        title: "Bahrain 2020 - Grosjean's Crash",
-        description: "First lap, Romain Grosjean makes contact and heads towards the barrier...",
-        videoId: "ZQ7_En2xEm4",
-        startTime: 0,
-        pauseTime: 5,
-        options: [
-          "Minor damage, he continues racing",
-          "The car is destroyed but he walks away fine",
-          "The car bursts into flames but he escapes",
-          "Red flag while they clear debris"
+          "Perfect pit entry",
+          "Slows too early",
+          "Misses turn",
+          "Speeds through cleanly"
         ],
         correct: 2,
-        hint: "This was a miracle escape"
+        hint: "Where's the left turn?"
       },
       {
-        title: "Brazil 2019 - Ferrari Teammates Collide",
-        description: "Leclerc and Vettel are battling for position, running very close...",
-        videoId: "hUdO7mfnVcI",
-        startTime: 0,
-        pauseTime: 8,
+        title: "Wildest WRC Rally Moments",
+        description: "A rally car hits a blind crest.",
+        videoId: "_GCKI_LbnRM",
+        startTime: 166,
+        pauseTime: 180,
         options: [
-          "Vettel lets Leclerc through on team orders",
-          "They collide and both retire from the race",
-          "Leclerc backs off to avoid contact",
-          "They continue racing cleanly"
+          "Lands straight",
+          "Slides sideways",
+          "Spins off",
+          "Lands in spectator area"
         ],
         correct: 1,
-        hint: "Ferrari was not happy after this race"
+        hint: "Too much throttle."
       },
       {
-        title: "Monaco 2022 - Perez's Wall Kiss",
-        description: "Sergio Perez pushing hard through the swimming pool section in wet conditions...",
-        videoId: "HQ5-bJCfyz8",
-        startTime: 0,
-        pauseTime: 5,
+        title: "Motorsport Crash 2025 – May Compilation",
+        description: "A rally car clipping a corner on a jump.",
+        videoId: "XesD9Njz75M",
+        startTime: 50,
+        pauseTime: 65,
         options: [
-          "Clean run through the chicane",
-          "Clips the wall but continues",
-          "Spins and blocks the track",
-          "Crashes out of the race"
+          "Clears it",
+          "Nose down and crash",
+          "Spins sideways",
+          "Red flag stops action"
+        ],
+        correct: 0,
+        hint: "Off-line but still alive."
+      },
+      {
+        title: "Best Motorsport Crashes 2024",
+        description: "A GT car enters high speed sweep.",
+        videoId: "TOtoe3KqyOI",
+        startTime: 195,
+        pauseTime: 210,
+        options: [
+          "Runs clean",
+          "Tire blowout",
+          "Hits wall",
+          "Spins free"
+        ],
+        correct: 3,
+        hint: "Slides without hitting."
+      },
+      {
+        title: "Rally Bloopers (WRC Finland)",
+        description: "A competitor laughs on the stage.",
+        videoId: "Dul8o9cNh5k",
+        startTime: 40,
+        pauseTime: 55,
+        options: [
+          "Tricky hairpin",
+          "Co-driver sneezes",
+          "Driver loses glove",
+          "Car fogs up"
         ],
         correct: 1,
-        hint: "Monaco punishes the smallest errors"
+        hint: "Unexpected human chaos."
+      },
+      {
+        title: "Motorsport Crash 2025 – Week 21",
+        description: "A touring car swings wide.",
+        videoId: "0yklYJ7zpSY",
+        startTime: 78,
+        pauseTime: 93,
+        options: [
+          "Tip-over crash",
+          "Clean pass",
+          "Spins into pits",
+          "Hits barrier hard"
+        ],
+        correct: 0,
+        hint: "Airborne surprise."
+      },
+      {
+        title: "Havoc 6 Crash Montage",
+        description: "A rally driver misjudges the corner.",
+        videoId: "AJpB9rVamUk",
+        startTime: 142,
+        pauseTime: 160,
+        options: [
+          "Finds grip",
+          "Against bank",
+          "Rolls multiple times",
+          "Continues clean"
+        ],
+        correct: 2,
+        hint: "Roof-top view."
+      },
+      {
+        title: "Top WRC Rally 2025 Crashes",
+        description: "A high speed country road corner.",
+        videoId: "luBn70tuJXg",
+        startTime: 110,
+        pauseTime: 125,
+        options: [
+          "Perfect through",
+          "Understeer broadside",
+          "Oversteer spin",
+          "Bounce off bank"
+        ],
+        correct: 1,
+        hint: "Too wide."
+      },
+      {
+        title: "NASCAR AIRBORNE Moments",
+        description: "A stock car approaches turn four.",
+        videoId: "-UvRK_a0vm8",
+        startTime: 37,
+        pauseTime: 52,
+        options: [
+          "Stays down",
+          "Gets airborne",
+          "Tire blowout",
+          "Spins out"
+        ],
+        correct: 1,
+        hint: "Nose lifts."
+      },
+      {
+        title: "Motorsport Crashes 2025 Week 40/41",
+        description: "A car fights for track position.",
+        videoId: "EJ7IcVDBTM4",
+        startTime: 185,
+        pauseTime: 200,
+        options: [
+          "Spins out",
+          "Clean defend",
+          "Contact and wobble",
+          "Pit-lane drama"
+        ],
+        correct: 2,
+        hint: "Front-end instability."
+      },
+      {
+        title: "WRC Bloopers & Funny Highlights",
+        description: "Something goes hilariously wrong on stage.",
+        videoId: "ARjjMPWiLgo",
+        startTime: 58,
+        pauseTime: 73,
+        options: [
+          "Perfect run",
+          "Car pops hood",
+          "Co-driver trips",
+          "Radio falls out"
+        ],
+        correct: 2,
+        hint: "Human element."
+      },
+      {
+        title: "Motorsport Crashes Playlist - Sprint Car",
+        description: "Sprint car tries a tight corner.",
+        videoId: "PLdVJUIT1C6VczXRuyqrXiQUEoOPydcjKo",
+        startTime: 48,
+        pauseTime: 63,
+        options: [
+          "Clean through",
+          "Wheelie over curb",
+          "Knocked sideways",
+          "Spin finish"
+        ],
+        correct: 2,
+        hint: "Too much lock."
+      },
+      {
+        title: "WRC Best Moments Playlist",
+        description: "Car enters long left-hander.",
+        videoId: "PLODyu6T9_emz1jmiT7Cj6f0fK9WRSN5rz",
+        startTime: 30,
+        pauseTime: 45,
+        options: [
+          "Perfect line",
+          "Drifts wide",
+          "Spin recover",
+          "Off into field"
+        ],
+        correct: 1,
+        hint: "Rally style."
       }
     ]
   }
