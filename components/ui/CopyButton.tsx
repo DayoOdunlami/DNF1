@@ -63,7 +63,7 @@ export default function CopyButton({ text, label = 'Copy Link', className = '' }
           {copied ? '✓ Copied!' : '📋 Copy'}
         </motion.button>
         
-        {navigator.share && (
+        {'share' in navigator && (
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
