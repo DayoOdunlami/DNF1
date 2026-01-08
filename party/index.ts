@@ -3,6 +3,8 @@ import type { GameMessage, GameRoom, PlayerRole } from "../lib/types";
 import { createInitialGameRoom } from "../lib/gameState";
 
 export default class GameRoomServer implements Party {
+  private gameState: GameRoom | undefined;
+  
   constructor(readonly party: Party) {}
 
   onConnect(conn: Connection) {
@@ -16,15 +18,14 @@ export default class GameRoomServer implements Party {
       
       // Handle state request
       if (msg.type === 'state:request') {
-        const currentState = this.party.state.get(roomId) as GameRoom | undefined;
-        if (currentState) {
-          sender.send(JSON.stringify({ type: 'state:update', state: currentState }));
+        if (this.gameState) {
+          sender.send(JSON.stringify({ type: 'state:update', state: this.gameState }));
         }
         return;
       }
       
-      // Get current state from storage or create new
-      let currentState = this.party.state.get(roomId) as GameRoom | undefined;
+      // Get current state from memory or create new
+      let currentState = this.gameState;
       
       let newState: GameRoom;
       
@@ -34,14 +35,14 @@ export default class GameRoomServer implements Party {
           newState = createInitialGameRoom(roomId, sender.id);
           newState.players.host.name = msg.name;
           newState.players.host.connected = true;
-          this.party.state.put(roomId, newState);
+          this.gameState = newState;
           this.broadcast({ type: 'state:update', state: newState });
         } else if (msg.type === 'player:joined' && msg.player === 'guest') {
           // Guest joined but no room exists - create one with guest as placeholder
           newState = createInitialGameRoom(roomId, 'pending-host');
           newState.players.guest.name = msg.name;
           newState.players.guest.connected = true;
-          this.party.state.put(roomId, newState);
+          this.gameState = newState;
           this.broadcast({ type: 'state:update', state: newState });
         }
         return;
@@ -203,7 +204,7 @@ export default class GameRoomServer implements Party {
       }
       
       // Save state and broadcast
-      this.party.state.put(roomId, newState);
+      this.gameState = newState;
       this.broadcast({ type: 'state:update', state: newState });
       
     } catch (error) {
