@@ -283,6 +283,163 @@ export const rounds: Round[] = [
     ]
   },
   {
+    name: "What Happened Next? Part 2",
+    subtitle: "More epic moments - predict the outcome!",
+    type: "video",
+    questions: [
+      {
+        title: "Motorsport Crashes 2025 Week 42",
+        description: "A racing car enters a high-speed corner on the edge of control...",
+        videoId: "EJ7IcVDBTM4",
+        startTime: 220,
+        pauseTime: 235,
+        options: [
+          "Perfect corner exit",
+          "Loses rear and spins",
+          "Oversteers into barrier",
+          "Saves it dramatically"
+        ],
+        correct: 2,
+        hint: "Too much speed, not enough grip."
+      },
+      {
+        title: "Havoc 7 - Rally Car Jump",
+        description: "Rally car launching off a crest with spectators watching below...",
+        videoId: "AJpB9rVamUk",
+        startTime: 180,
+        pauseTime: 195,
+        options: [
+          "Smooth landing and continue",
+          "Hard landing breaks suspension",
+          "Rolls multiple times on landing",
+          "Crashes into trees"
+        ],
+        correct: 1,
+        hint: "Landing angle is critical."
+      },
+      {
+        title: "NASCAR Daytona 2024 - Restart Drama",
+        description: "Double-file restart, pack racing through turn 4 at 190+ mph...",
+        videoId: "-UvRK_a0vm8",
+        startTime: 95,
+        pauseTime: 110,
+        options: [
+          "Clean racing through",
+          "Contact sends cars spinning",
+          "Single car wreck",
+          "Caution for debris"
+        ],
+        correct: 1,
+        hint: "Plate racing is unpredictable."
+      },
+      {
+        title: "WRC Rally Estonia 2024 - Gravel Slide",
+        description: "Rally car sliding on loose gravel approaching a tight left-hander...",
+        videoId: "_GCKI_LbnRM",
+        startTime: 240,
+        pauseTime: 255,
+        options: [
+          "Perfect Scandinavian flick",
+          "Slides wide into ditch",
+          "Rolls in the corner",
+          "Cuts too tight and hits bank"
+        ],
+        correct: 1,
+        hint: "Gravel requires precision."
+      },
+      {
+        title: "Motorsport Fails 2025 Week 19",
+        description: "Race car attempting an overtake on the outside line...",
+        videoId: "XesD9Njz75M",
+        startTime: 120,
+        pauseTime: 135,
+        options: [
+          "Clean pass completed",
+          "Runs out of room and spins",
+          "Contact with other car",
+          "Goes off track but recovers"
+        ],
+        correct: 1,
+        hint: "Outside line is risky."
+      },
+      {
+        title: "Best Motorsport Crashes 2024 - Part 2",
+        description: "GT car braking late into a tight hairpin corner...",
+        videoId: "TOtoe3KqyOI",
+        startTime: 250,
+        pauseTime: 265,
+        options: [
+          "Perfect braking point",
+          "Locks up and slides",
+          "Misses corner completely",
+          "Cuts inside and gains position"
+        ],
+        correct: 1,
+        hint: "Locked brakes mean no steering."
+      },
+      {
+        title: "WRC Rally Portugal 2024 Highlights",
+        description: "Rally car navigating through a narrow village section...",
+        videoId: "Dul8o9cNh5k",
+        startTime: 90,
+        pauseTime: 105,
+        options: [
+          "Clean passage through",
+          "Clips a wall corner",
+          "Goes too wide and hits barrier",
+          "Spins in middle of village"
+        ],
+        correct: 2,
+        hint: "Villages are unforgiving."
+      },
+      {
+        title: "NASCAR Road Course Chaos 2024",
+        description: "Road course race, car diving to the inside for a late pass...",
+        videoId: "4pIh-SXBaIU",
+        startTime: 150,
+        pauseTime: 165,
+        options: [
+          "Perfect dive bomb",
+          "Overshoots and goes wide",
+          "Contact spins both cars",
+          "Misses braking point"
+        ],
+        correct: 1,
+        hint: "Late braking is a gamble."
+      },
+      {
+        title: "Rally Finland Big Moments 2024",
+        description: "Car approaching Finland's famous jump at full speed...",
+        videoId: "luBn70tuJXg",
+        startTime: 200,
+        pauseTime: 215,
+        options: [
+          "Spectacular flying finish",
+          "Hard landing breaks car",
+          "Overshoots and crashes",
+          "Aborts jump and slows"
+        ],
+        correct: 0,
+        hint: "Finland jumps are legendary."
+      },
+      {
+        title: "Motorsport Crashes Compilation 2025",
+        description: "Multiple cars racing three-wide approaching a bottleneck...",
+        videoId: "0yklYJ7zpSY",
+        startTime: 150,
+        pauseTime: 165,
+        options: [
+          "All make it through",
+          "Contact causes pile-up",
+          "One car spins out",
+          "Safety car deployed"
+        ],
+        correct: 1,
+        hint: "Three-wide never ends well."
+      }
+    ]
+  },
+  {
     name: "Speed Race Challenge",
     subtitle: "First to 50 clicks wins! Pure speed and reflexes!",
     type: "race",
