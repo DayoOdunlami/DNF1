@@ -20,7 +20,7 @@ npm run dev
 ```
 
 ### 3. Open Browser
-Go to http://localhost:3000
+Go to http://localhost:4000
 
 ### 4. Test Multiplayer
 1. Click "Create Game" on one browser/device
