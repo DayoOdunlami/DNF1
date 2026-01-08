@@ -15,7 +15,7 @@ export default function MrMrsRound({ gameState, role, sendMessage, question }: M
   const [myAnswer, setMyAnswer] = useState('');
   const [betAmount, setBetAmount] = useState(gameState.bets[role]);
   const currentRound = rounds[gameState.currentRound];
-  const totalQuestions = currentRound?.questions.length || 0;
+  const totalQuestions = currentRound?.questions?.length || 0;
 
   const handleBetChange = (delta: number) => {
     const newBet = Math.max(5, Math.min(gameState.players[role].coins, betAmount + delta));

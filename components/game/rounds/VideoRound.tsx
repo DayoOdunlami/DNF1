@@ -26,7 +26,7 @@ export default function VideoRound({ gameState, role, sendMessage, question }: V
   const [betAmount, setBetAmount] = useState(gameState.bets[role]);
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const currentRound = rounds[gameState.currentRound];
-  const totalQuestions = currentRound?.questions.length || 0;
+  const totalQuestions = currentRound?.questions?.length || 0;
 
   const handleBetChange = (delta: number) => {
     const newBet = Math.max(5, Math.min(gameState.players[role].coins, betAmount + delta));

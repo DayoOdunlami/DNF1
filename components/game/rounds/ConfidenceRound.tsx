@@ -16,7 +16,7 @@ export default function ConfidenceRound({ gameState, role, sendMessage, question
   const [guess, setGuess] = useState<number | ''>('');
   const [tyreSelection, setTyreSelection] = useState<TyreType>(gameState.tyreSelection);
   const currentRound = rounds[gameState.currentRound];
-  const totalQuestions = currentRound?.questions.length || 0;
+  const totalQuestions = currentRound?.questions?.length || 0;
 
   const handleBetChange = (delta: number) => {
     const newBet = Math.max(5, Math.min(gameState.players[role].coins, betAmount + delta));
