@@ -15,7 +15,7 @@ export default function AdminPanel({ gameState, sendMessage }: AdminPanelProps) 
   const [guestCoins, setGuestCoins] = useState(gameState.players.guest.coins);
 
   const currentRound = rounds[gameState.currentRound];
-  const totalQuestions = currentRound?.questions.length || 0;
+  const totalQuestions = currentRound?.questions?.length || 0;
 
   const handleJumpRound = (round: number) => {
     sendMessage({ type: 'admin:jump-round', round });
