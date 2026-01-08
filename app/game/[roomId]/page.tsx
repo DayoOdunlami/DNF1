@@ -29,11 +29,13 @@ export default function GamePage() {
     });
 
     let determinedRole: PlayerRole | null = null;
+    let connectionId: string | null = null;
 
     ws.onopen = () => {
       setConnected(true);
       console.log('Connected to room:', roomId);
       
+      // Get connection ID from the socket (we'll use a workaround)
       // Request initial state (server will create it if it doesn't exist)
       ws.send(JSON.stringify({ type: 'state:request' } as any));
     };
@@ -46,19 +48,20 @@ export default function GamePage() {
           const state = message.state as GameRoom;
           setGameState(state);
           
-          // Automatically determine role based on who's connected
-          // First person becomes host, second becomes guest
-          if (!determinedRole) {
+          // Use role assigned by server if provided
+          if (message.yourRole && !determinedRole) {
+            determinedRole = message.yourRole;
+            setRole(message.yourRole);
+          } else if (!determinedRole) {
+            // Fallback: determine role based on connection status
             if (!state.players.host.connected) {
-              // No host connected yet, this person becomes host
               determinedRole = 'host';
               setRole('host');
             } else if (!state.players.guest.connected) {
-              // Host exists but no guest, this person becomes guest
               determinedRole = 'guest';
               setRole('guest');
             } else {
-              // Both slots taken, default to guest (room is full)
+              // Both connected - default to guest
               determinedRole = 'guest';
               setRole('guest');
             }

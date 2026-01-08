@@ -5,11 +5,37 @@ import { createInitialGameRoom } from "../lib/gameState";
 export default class GameRoomServer implements Party {
   private gameState: GameRoom | undefined;
   private hostConnectionId: string | undefined;
+  private connections: Set<string> = new Set();
   
   constructor(readonly party: Party) {}
 
   onConnect(conn: Connection) {
     console.log(`Connection: ${conn.id} to room: ${this.party.id}`);
+    this.connections.add(conn.id);
+    
+    // If no state exists and this is the first connection, make them host
+    if (!this.gameState && this.connections.size === 1) {
+      this.hostConnectionId = conn.id;
+      const roomId = this.party.id;
+      this.gameState = createInitialGameRoom(roomId, conn.id);
+      // Broadcast initial state
+      this.broadcast({ type: 'state:update', state: this.gameState });
+    }
+  }
+
+  onClose(conn: Connection) {
+    console.log(`Disconnection: ${conn.id} from room: ${this.party.id}`);
+    this.connections.delete(conn.id);
+    
+    // If host disconnects, mark them as disconnected
+    if (this.gameState && conn.id === this.gameState.hostId) {
+      this.gameState.players.host.connected = false;
+      this.broadcast({ type: 'state:update', state: this.gameState });
+    } else if (this.gameState) {
+      // Guest disconnected
+      this.gameState.players.guest.connected = false;
+      this.broadcast({ type: 'state:update', state: this.gameState });
+    }
   }
 
   onMessage(message: string, sender: Connection) {
@@ -19,17 +45,55 @@ export default class GameRoomServer implements Party {
       
       // Handle state request
       if (msg.type === 'state:request') {
+        let assignedRole: PlayerRole | null = null;
+        
         if (this.gameState) {
-          sender.send(JSON.stringify({ type: 'state:update', state: this.gameState }));
+          // State exists - determine role based on connections
+          if (!this.gameState.players.host.connected) {
+            // No host yet, this person becomes host
+            this.hostConnectionId = sender.id;
+            this.gameState.hostId = sender.id;
+            this.gameState.players.host.connected = true;
+            assignedRole = 'host';
+            this.broadcast({ type: 'state:update', state: this.gameState });
+          } else if (!this.gameState.players.guest.connected) {
+            // Host exists, this person becomes guest
+            this.gameState.players.guest.connected = true;
+            assignedRole = 'guest';
+            this.broadcast({ type: 'state:update', state: this.gameState });
+          } else {
+            // Both slots taken - assign based on connection ID
+            if (sender.id === this.gameState.hostId) {
+              assignedRole = 'host';
+              this.gameState.players.host.connected = true;
+            } else {
+              assignedRole = 'guest';
+              this.gameState.players.guest.connected = true;
+            }
+            this.broadcast({ type: 'state:update', state: this.gameState });
+          }
+          // Send current state to requester with their assigned role
+          sender.send(JSON.stringify({ 
+            type: 'state:update', 
+            state: this.gameState,
+            yourRole: assignedRole 
+          }));
         } else {
           // No state exists yet - create initial state with this connection as host
-          // The first connection to request state becomes the host
           if (!this.hostConnectionId) {
             this.hostConnectionId = sender.id;
           }
           const newState = createInitialGameRoom(roomId, this.hostConnectionId);
+          newState.players.host.connected = true;
           this.gameState = newState;
-          sender.send(JSON.stringify({ type: 'state:update', state: newState }));
+          assignedRole = 'host';
+          this.broadcast({ type: 'state:update', state: newState });
+          // Send state with role assignment
+          sender.send(JSON.stringify({ 
+            type: 'state:update', 
+            state: newState,
+            yourRole: 'host'
+          }));
         }
         return;
       }
