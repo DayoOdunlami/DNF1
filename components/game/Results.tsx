@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import type { GameRoom } from '@/lib/types';
 import Confetti from '@/components/ui/Confetti';
+import { playSound, playBeep } from '@/components/utils/sounds';
 
 interface ResultsProps {
   gameState: GameRoom;
@@ -16,7 +17,12 @@ export default function Results({ gameState }: ResultsProps) {
 
   useEffect(() => {
     setShowConfetti(true);
-  }, []);
+    if (winner !== 'tie') {
+      playSound('win') || playBeep(600, 300);
+    } else {
+      playSound('win') || playBeep(500, 200);
+    }
+  }, [winner]);
 
   return (
     <>

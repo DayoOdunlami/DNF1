@@ -1,6 +1,8 @@
 'use client';
 
 import type { GameRoom, GameMessage, PlayerRole, PowerupType } from '@/lib/types';
+import { Haptics } from '@/components/utils/haptics';
+import { playSound, playBeep } from '@/components/utils/sounds';
 
 interface PowerupsPanelProps {
   gameState: GameRoom;
@@ -28,6 +30,8 @@ export default function PowerupsPanel({ gameState, role, sendMessage }: Powerups
         player: role,
         powerup,
       });
+      Haptics.medium();
+      playSound('click') || playBeep(500, 100);
     }
   };
 

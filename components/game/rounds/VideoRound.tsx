@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import type { GameRoom, GameMessage, PlayerRole } from '@/lib/types';
 import { rounds } from '@/lib/questions';
+import { Haptics } from '@/components/utils/haptics';
+import { playSound, playBeep } from '@/components/utils/sounds';
 
 interface VideoRoundProps {
   gameState: GameRoom;
@@ -34,6 +36,8 @@ export default function VideoRound({ gameState, role, sendMessage, question }: V
 
   const handleBuzzer = () => {
     sendMessage({ type: 'buzzer:pressed', player: role });
+    Haptics.strong();
+    playSound('buzzer') || playBeep(800, 150);
   };
 
   const handleSelectAnswer = (index: number) => {

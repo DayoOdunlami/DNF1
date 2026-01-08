@@ -41,7 +41,8 @@ export default function AnimatedScoreboard({ gameState }: AnimatedScoreboardProp
       >
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-neon-red to-neon-yellow"></div>
         <div className="text-center">
-          <div className="font-orbitron text-xl font-bold mb-2 text-neon-red">
+          <div className="font-orbitron text-xl font-bold mb-2 text-neon-red flex items-center justify-center gap-2">
+            <span>🏎️</span>
             {gameState.players.host.name || 'Host'}
           </div>
           <div className="flex items-center justify-center gap-2 relative">
@@ -83,7 +84,8 @@ export default function AnimatedScoreboard({ gameState }: AnimatedScoreboardProp
       >
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-neon-blue to-neon-green"></div>
         <div className="text-center">
-          <div className="font-orbitron text-xl font-bold mb-2 text-neon-blue">
+          <div className="font-orbitron text-xl font-bold mb-2 text-neon-blue flex items-center justify-center gap-2">
+            <span>🚗</span>
             {gameState.players.guest.name || 'Guest'}
           </div>
           <div className="flex items-center justify-center gap-2 relative">

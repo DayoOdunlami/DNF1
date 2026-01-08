@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import type { GameRoom, GameMessage, PlayerRole } from '@/lib/types';
+import CopyButton from '@/components/ui/CopyButton';
 
 interface LobbyProps {
   gameState: GameRoom;
@@ -127,9 +128,21 @@ export default function Lobby({ gameState, role, sendMessage }: LobbyProps) {
 
               {isHost && (
                 <div className="mt-6 p-4 bg-neon-blue/10 border border-neon-blue/30 rounded-xl">
-                  <p className="text-sm text-neon-blue font-rajdhani text-center">
-                    📋 Share this link: {typeof window !== 'undefined' && window.location.href.split('?')[0]}?role=guest
+                  <p className="text-sm text-neon-blue font-rajdhani text-center mb-3">
+                    📋 Share this link with your co-driver:
                   </p>
+                  <div className="flex flex-col items-center gap-2">
+                    <input
+                      type="text"
+                      readOnly
+                      value={typeof window !== 'undefined' ? `${window.location.href.split('?')[0]}?role=guest` : ''}
+                      className="w-full bg-black/30 border border-white/20 rounded-lg px-3 py-2 font-rajdhani text-sm text-white text-center"
+                    />
+                    <CopyButton
+                      text={typeof window !== 'undefined' ? `${window.location.href.split('?')[0]}?role=guest` : ''}
+                      className="w-full"
+                    />
+                  </div>
                 </div>
               )}
             </div>

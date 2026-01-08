@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import type { GameRoom, GameMessage, PlayerRole } from '@/lib/types';
+import { Haptics } from '@/components/utils/haptics';
+import { playSound, playBeep } from '@/components/utils/sounds';
 
 interface RaceRoundProps {
   gameState: GameRoom;
@@ -57,6 +59,8 @@ export default function RaceRound({ gameState, role, sendMessage }: RaceRoundPro
       setWinner(null);
       startTimeRef.current = Date.now();
       sendMessage({ type: 'game:started' });
+      Haptics.race();
+      playSound('race-start') || playBeep(600, 200);
     }
   };
 
@@ -69,6 +73,8 @@ export default function RaceRound({ gameState, role, sendMessage }: RaceRoundPro
     };
     setClicks(newClicks);
     sendMessage({ type: 'answer:submitted', player: role, answer: newClicks[role] });
+    Haptics.light();
+    playSound('race-click') || playBeep(400, 50);
   };
 
   const handleRaceEnd = () => {
