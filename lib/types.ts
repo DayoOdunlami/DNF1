@@ -2,7 +2,7 @@ export type PlayerRole = 'host' | 'guest';
 
 export type GameStatus = 'lobby' | 'playing' | 'finished';
 
-export type RoundType = 'mr-mrs' | 'confidence' | 'video' | 'race';
+export type RoundType = 'mr-mrs' | 'confidence' | 'video' | 'race' | 'scattergories';
 
 export type RoundPhase = 'betting' | 'answering' | 'reveal' | 'results';
 

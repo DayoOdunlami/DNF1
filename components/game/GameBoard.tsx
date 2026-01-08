@@ -10,6 +10,7 @@ import MrMrsRound from './rounds/MrMrsRound';
 import ConfidenceRound from './rounds/ConfidenceRound';
 import VideoRound from './rounds/VideoRound';
 import RaceRound from './rounds/RaceRound';
+import ScattergoriesRaceRound from './rounds/ScattergoriesRaceRound';
 
 interface GameBoardProps {
   gameState: GameRoom;
@@ -61,8 +62,8 @@ export default function GameBoard({ gameState, role, sendMessage }: GameBoardPro
     );
   }
 
-  // Race round doesn't need a question
-  if (currentRound.type === 'race') {
+  // Race and Scattergories rounds don't need questions
+  if (currentRound.type === 'race' || currentRound.type === 'scattergories') {
     return (
       <div className="min-h-screen py-8 px-4">
         <div className="max-w-6xl mx-auto">
@@ -76,11 +77,20 @@ export default function GameBoard({ gameState, role, sendMessage }: GameBoardPro
           <PowerupsPanel gameState={gameState} role={role} sendMessage={sendMessage} />
 
           <div className="bg-dark-card rounded-3xl p-6 md:p-8 border border-white/10 mb-6">
-            <RaceRound
-              gameState={gameState}
-              role={role}
-              sendMessage={sendMessage}
-            />
+            {currentRound.type === 'race' && (
+              <RaceRound
+                gameState={gameState}
+                role={role}
+                sendMessage={sendMessage}
+              />
+            )}
+            {currentRound.type === 'scattergories' && (
+              <ScattergoriesRaceRound
+                gameState={gameState}
+                role={role}
+                sendMessage={sendMessage}
+              />
+            )}
           </div>
 
           {role === 'host' && <AdminPanel gameState={gameState} sendMessage={sendMessage} />}
@@ -136,6 +146,13 @@ export default function GameBoard({ gameState, role, sendMessage }: GameBoardPro
           )}
           {currentRound.type === 'race' && (
             <RaceRound
+              gameState={gameState}
+              role={role}
+              sendMessage={sendMessage}
+            />
+          )}
+          {currentRound.type === 'scattergories' && (
+            <ScattergoriesRaceRound
               gameState={gameState}
               role={role}
               sendMessage={sendMessage}

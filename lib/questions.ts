@@ -444,6 +444,12 @@ export const rounds: Round[] = [
     subtitle: "First to 50 clicks wins! Pure speed and reflexes!",
     type: "race",
     questions: [] // Race round doesn't use questions
+  },
+  {
+    name: "Scattergories Race",
+    subtitle: "Type answers fast! Opponent votes on validity - valid answers move your car!",
+    type: "scattergories",
+    questions: [] // Categories are generated in component
   }
 ];
 
