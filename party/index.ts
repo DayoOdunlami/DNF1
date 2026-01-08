@@ -4,6 +4,7 @@ import { createInitialGameRoom } from "../lib/gameState";
 
 export default class GameRoomServer implements Party {
   private gameState: GameRoom | undefined;
+  private hostConnectionId: string | undefined;
   
   constructor(readonly party: Party) {}
 
@@ -20,6 +21,15 @@ export default class GameRoomServer implements Party {
       if (msg.type === 'state:request') {
         if (this.gameState) {
           sender.send(JSON.stringify({ type: 'state:update', state: this.gameState }));
+        } else {
+          // No state exists yet - create initial state with this connection as host
+          // The first connection to request state becomes the host
+          if (!this.hostConnectionId) {
+            this.hostConnectionId = sender.id;
+          }
+          const newState = createInitialGameRoom(roomId, this.hostConnectionId);
+          this.gameState = newState;
+          sender.send(JSON.stringify({ type: 'state:update', state: newState }));
         }
         return;
       }
@@ -30,8 +40,9 @@ export default class GameRoomServer implements Party {
       let newState: GameRoom;
       
       if (!currentState) {
-        // First connection - host creates the room
+        // Fallback: if player:joined arrives before state:request (shouldn't happen with new flow)
         if (msg.type === 'player:joined' && msg.player === 'host') {
+          this.hostConnectionId = sender.id;
           newState = createInitialGameRoom(roomId, sender.id);
           newState.players.host.name = msg.name;
           newState.players.host.connected = true;
@@ -39,7 +50,10 @@ export default class GameRoomServer implements Party {
           this.broadcast({ type: 'state:update', state: newState });
         } else if (msg.type === 'player:joined' && msg.player === 'guest') {
           // Guest joined but no room exists - create one with guest as placeholder
-          newState = createInitialGameRoom(roomId, 'pending-host');
+          if (!this.hostConnectionId) {
+            this.hostConnectionId = 'pending-host';
+          }
+          newState = createInitialGameRoom(roomId, this.hostConnectionId);
           newState.players.guest.name = msg.name;
           newState.players.guest.connected = true;
           this.gameState = newState;
@@ -57,6 +71,7 @@ export default class GameRoomServer implements Party {
             if (sender.id === currentState.hostId || !currentState.players.host.connected) {
               if (sender.id !== currentState.hostId) {
                 newState.hostId = sender.id;
+                this.hostConnectionId = sender.id;
               }
               newState.players.host.name = msg.name;
               newState.players.host.connected = true;

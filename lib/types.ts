@@ -71,7 +71,7 @@ export interface Round {
   name: string;
   subtitle: string;
   type: RoundType;
-  questions: MrMrsQuestion[] | ConfidenceQuestion[] | VideoQuestion[] | [];
+  questions?: MrMrsQuestion[] | ConfidenceQuestion[] | VideoQuestion[] | [];
 }
 
 export type GameMessage =

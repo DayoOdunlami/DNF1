@@ -21,7 +21,7 @@ interface GameBoardProps {
 export default function GameBoard({ gameState, role, sendMessage }: GameBoardProps) {
   const [showRoundIntro, setShowRoundIntro] = useState(true);
   const currentRound = rounds[gameState.currentRound];
-  const currentQuestion = currentRound?.questions[gameState.currentQuestion];
+  const currentQuestion = currentRound?.questions?.[gameState.currentQuestion];
 
   useEffect(() => {
     // Show intro when round changes

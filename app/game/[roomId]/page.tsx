@@ -33,15 +33,8 @@ export default function GamePage() {
       setConnected(true);
       console.log('Connected to room:', roomId);
       
-      // Request initial state
+      // Request initial state (server will create it if it doesn't exist)
       ws.send(JSON.stringify({ type: 'state:request' } as any));
-      
-      // If we're the host and no state exists, create it
-      if (role === 'host') {
-        setTimeout(() => {
-          ws.send(JSON.stringify({ type: 'state:request' } as any));
-        }, 100);
-      }
     };
 
     ws.onmessage = (event) => {
