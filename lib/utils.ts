@@ -14,3 +14,4 @@ export function generateRoomCode(): string {
   return `${prefix}-${suffix}`;
 }
 
+

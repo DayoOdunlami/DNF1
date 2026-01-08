@@ -17,10 +17,14 @@ export default function Results({ gameState }: ResultsProps) {
 
   useEffect(() => {
     setShowConfetti(true);
-    if (winner !== 'tie') {
-      playSound('win') || playBeep(600, 300);
-    } else {
-      playSound('win') || playBeep(500, 200);
+    try {
+      playSound('win');
+    } catch {
+      if (winner !== 'tie') {
+        playBeep(600, 300);
+      } else {
+        playBeep(500, 200);
+      }
     }
   }, [winner]);
 

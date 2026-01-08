@@ -101,7 +101,11 @@ export default function ScattergoriesRaceRound({ gameState, role, sendMessage }:
       startTimeRef.current = Date.now();
       sendMessage({ type: 'game:started' });
       Haptics.race();
-      playSound('race-start') || playBeep(600, 200);
+      try {
+        playSound('race-start');
+      } catch {
+        playBeep(600, 200);
+      }
       setTimeout(() => inputRef.current?.focus(), 100);
     }
   };
@@ -141,7 +145,11 @@ export default function ScattergoriesRaceRound({ gameState, role, sendMessage }:
       setWordsTyped(wordsTyped + 1);
       setCurrentInput('');
       Haptics.light();
-      playSound('click') || playBeep(400, 50);
+      try {
+        playSound('click');
+      } catch {
+        playBeep(400, 50);
+      }
       
       // Calculate typing speed (words per minute)
       if (startTimeRef.current) {

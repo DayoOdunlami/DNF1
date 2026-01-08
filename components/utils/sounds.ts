@@ -59,3 +59,4 @@ export function playBeep(frequency = 800, duration = 100) {
   oscillator.stop(audioContext.currentTime + duration / 1000);
 }
 
+

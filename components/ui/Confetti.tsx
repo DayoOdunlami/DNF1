@@ -63,3 +63,4 @@ export default function Confetti({ trigger, type = 'celebration' }: ConfettiProp
   return null;
 }
 
+

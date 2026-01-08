@@ -37,7 +37,11 @@ export default function VideoRound({ gameState, role, sendMessage, question }: V
   const handleBuzzer = () => {
     sendMessage({ type: 'buzzer:pressed', player: role });
     Haptics.strong();
-    playSound('buzzer') || playBeep(800, 150);
+    try {
+      playSound('buzzer');
+    } catch {
+      playBeep(800, 150);
+    }
   };
 
   const handleSelectAnswer = (index: number) => {

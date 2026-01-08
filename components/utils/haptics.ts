@@ -29,3 +29,4 @@ export const Haptics = {
   race: () => vibrate([15, 10, 15, 10, 15]),
 };
 
+

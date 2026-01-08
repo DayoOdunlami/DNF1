@@ -31,7 +31,11 @@ export default function PowerupsPanel({ gameState, role, sendMessage }: Powerups
         powerup,
       });
       Haptics.medium();
-      playSound('click') || playBeep(500, 100);
+      try {
+        playSound('click');
+      } catch {
+        playBeep(500, 100);
+      }
     }
   };
 

@@ -98,3 +98,4 @@
 4. **Show progress** - Users love seeing their advancement
 5. **Mobile-first** - Ensure touch interactions work well
 
+

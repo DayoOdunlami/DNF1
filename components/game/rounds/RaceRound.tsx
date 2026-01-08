@@ -60,7 +60,11 @@ export default function RaceRound({ gameState, role, sendMessage }: RaceRoundPro
       startTimeRef.current = Date.now();
       sendMessage({ type: 'game:started' });
       Haptics.race();
-      playSound('race-start') || playBeep(600, 200);
+      try {
+        playSound('race-start');
+      } catch {
+        playBeep(600, 200);
+      }
     }
   };
 
@@ -74,7 +78,11 @@ export default function RaceRound({ gameState, role, sendMessage }: RaceRoundPro
     setClicks(newClicks);
     sendMessage({ type: 'answer:submitted', player: role, answer: newClicks[role] });
     Haptics.light();
-    playSound('race-click') || playBeep(400, 50);
+    try {
+      playSound('race-click');
+    } catch {
+      playBeep(400, 50);
+    }
   };
 
   const handleRaceEnd = () => {
