@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import type { GameRoom, GameMessage, PlayerRole } from '@/lib/types';
+import type { GameRoom, GameMessage, PlayerRole, RoundType } from '@/lib/types';
 import { rounds } from '@/lib/questions';
 import AnimatedScoreboard from './AnimatedScoreboard';
 import PowerupsPanel from './PowerupsPanel';
