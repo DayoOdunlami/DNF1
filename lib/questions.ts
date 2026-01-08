@@ -281,6 +281,12 @@ export const rounds: Round[] = [
         hint: "Rally style."
       }
     ]
+  },
+  {
+    name: "Speed Race Challenge",
+    subtitle: "First to 50 clicks wins! Pure speed and reflexes!",
+    type: "race",
+    questions: [] // Race round doesn't use questions
   }
 ];
 

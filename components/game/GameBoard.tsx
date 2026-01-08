@@ -3,12 +3,13 @@
 import { useState, useEffect } from 'react';
 import type { GameRoom, GameMessage, PlayerRole } from '@/lib/types';
 import { rounds } from '@/lib/questions';
-import Scoreboard from './Scoreboard';
+import AnimatedScoreboard from './AnimatedScoreboard';
 import PowerupsPanel from './PowerupsPanel';
 import AdminPanel from './AdminPanel';
 import MrMrsRound from './rounds/MrMrsRound';
 import ConfidenceRound from './rounds/ConfidenceRound';
 import VideoRound from './rounds/VideoRound';
+import RaceRound from './rounds/RaceRound';
 
 interface GameBoardProps {
   gameState: GameRoom;
@@ -52,7 +53,43 @@ export default function GameBoard({ gameState, role, sendMessage }: GameBoardPro
     );
   }
 
-  if (!currentRound || !currentQuestion) {
+  if (!currentRound) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-gray-400">Loading question...</p>
+      </div>
+    );
+  }
+
+  // Race round doesn't need a question
+  if (currentRound.type === 'race') {
+    return (
+      <div className="min-h-screen py-8 px-4">
+        <div className="max-w-6xl mx-auto">
+          <header className="text-center mb-8">
+            <h1 className="font-orbitron text-3xl md:text-4xl font-black uppercase tracking-wider mb-2 bg-gradient-to-r from-neon-red to-neon-yellow bg-clip-text text-transparent">
+              🏎️ Date Night Grand Prix
+            </h1>
+          </header>
+
+          <AnimatedScoreboard gameState={gameState} />
+          <PowerupsPanel gameState={gameState} role={role} sendMessage={sendMessage} />
+
+          <div className="bg-dark-card rounded-3xl p-6 md:p-8 border border-white/10 mb-6">
+            <RaceRound
+              gameState={gameState}
+              role={role}
+              sendMessage={sendMessage}
+            />
+          </div>
+
+          {role === 'host' && <AdminPanel gameState={gameState} sendMessage={sendMessage} />}
+        </div>
+      </div>
+    );
+  }
+
+  if (!currentQuestion) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <p className="text-gray-400">Loading question...</p>
@@ -69,7 +106,7 @@ export default function GameBoard({ gameState, role, sendMessage }: GameBoardPro
           </h1>
         </header>
 
-        <Scoreboard gameState={gameState} />
+        <AnimatedScoreboard gameState={gameState} />
         <PowerupsPanel gameState={gameState} role={role} sendMessage={sendMessage} />
 
         <div className="bg-dark-card rounded-3xl p-6 md:p-8 border border-white/10 mb-6">
@@ -95,6 +132,13 @@ export default function GameBoard({ gameState, role, sendMessage }: GameBoardPro
               role={role}
               sendMessage={sendMessage}
               question={currentQuestion as any}
+            />
+          )}
+          {currentRound.type === 'race' && (
+            <RaceRound
+              gameState={gameState}
+              role={role}
+              sendMessage={sendMessage}
             />
           )}
         </div>

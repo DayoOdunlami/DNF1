@@ -2,7 +2,7 @@ export type PlayerRole = 'host' | 'guest';
 
 export type GameStatus = 'lobby' | 'playing' | 'finished';
 
-export type RoundType = 'mr-mrs' | 'confidence' | 'video';
+export type RoundType = 'mr-mrs' | 'confidence' | 'video' | 'race';
 
 export type RoundPhase = 'betting' | 'answering' | 'reveal' | 'results';
 
@@ -71,7 +71,7 @@ export interface Round {
   name: string;
   subtitle: string;
   type: RoundType;
-  questions: MrMrsQuestion[] | ConfidenceQuestion[] | VideoQuestion[];
+  questions: MrMrsQuestion[] | ConfidenceQuestion[] | VideoQuestion[] | [];
 }
 
 export type GameMessage =

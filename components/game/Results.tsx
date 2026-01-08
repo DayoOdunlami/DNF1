@@ -1,6 +1,8 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import type { GameRoom } from '@/lib/types';
+import Confetti from '@/components/ui/Confetti';
 
 interface ResultsProps {
   gameState: GameRoom;
@@ -10,9 +12,16 @@ export default function Results({ gameState }: ResultsProps) {
   const hostCoins = gameState.players.host.coins;
   const guestCoins = gameState.players.guest.coins;
   const winner = hostCoins > guestCoins ? 'host' : guestCoins > hostCoins ? 'guest' : 'tie';
+  const [showConfetti, setShowConfetti] = useState(false);
+
+  useEffect(() => {
+    setShowConfetti(true);
+  }, []);
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <>
+      <Confetti trigger={showConfetti} type={winner !== 'tie' ? 'win' : 'celebration'} />
+      <div className="min-h-screen flex items-center justify-center px-4">
       <div className="max-w-3xl w-full text-center">
         <div className="bg-dark-card rounded-3xl p-12 border border-white/10">
           <h2 className="font-orbitron text-4xl md:text-5xl font-black mb-6 bg-gradient-to-r from-neon-red to-neon-yellow bg-clip-text text-transparent">
@@ -63,6 +72,7 @@ export default function Results({ gameState }: ResultsProps) {
         </div>
       </div>
     </div>
+    </>
   );
 }
 
