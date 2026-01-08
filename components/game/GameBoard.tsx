@@ -63,7 +63,8 @@ export default function GameBoard({ gameState, role, sendMessage }: GameBoardPro
   }
 
   // Race and Scattergories rounds don't need questions
-  if (currentRound.type === 'race' || currentRound.type === 'scattergories') {
+  const roundType = currentRound.type;
+  if (roundType === 'race' || roundType === 'scattergories') {
     return (
       <div className="min-h-screen py-8 px-4">
         <div className="max-w-6xl mx-auto">
@@ -77,14 +78,14 @@ export default function GameBoard({ gameState, role, sendMessage }: GameBoardPro
           <PowerupsPanel gameState={gameState} role={role} sendMessage={sendMessage} />
 
           <div className="bg-dark-card rounded-3xl p-6 md:p-8 border border-white/10 mb-6">
-            {currentRound.type === 'race' && (
+            {roundType === 'race' && (
               <RaceRound
                 gameState={gameState}
                 role={role}
                 sendMessage={sendMessage}
               />
             )}
-            {currentRound.type === 'scattergories' && (
+            {roundType === 'scattergories' && (
               <ScattergoriesRaceRound
                 gameState={gameState}
                 role={role}
@@ -120,7 +121,7 @@ export default function GameBoard({ gameState, role, sendMessage }: GameBoardPro
         <PowerupsPanel gameState={gameState} role={role} sendMessage={sendMessage} />
 
         <div className="bg-dark-card rounded-3xl p-6 md:p-8 border border-white/10 mb-6">
-          {currentRound.type === 'mr-mrs' && (
+          {roundType === 'mr-mrs' && currentQuestion && (
             <MrMrsRound
               gameState={gameState}
               role={role}
@@ -128,7 +129,7 @@ export default function GameBoard({ gameState, role, sendMessage }: GameBoardPro
               question={currentQuestion as any}
             />
           )}
-          {currentRound.type === 'confidence' && (
+          {roundType === 'confidence' && currentQuestion && (
             <ConfidenceRound
               gameState={gameState}
               role={role}
@@ -136,7 +137,7 @@ export default function GameBoard({ gameState, role, sendMessage }: GameBoardPro
               question={currentQuestion as any}
             />
           )}
-          {currentRound.type === 'video' && (
+          {roundType === 'video' && currentQuestion && (
             <VideoRound
               gameState={gameState}
               role={role}
@@ -144,14 +145,14 @@ export default function GameBoard({ gameState, role, sendMessage }: GameBoardPro
               question={currentQuestion as any}
             />
           )}
-          {currentRound.type === 'race' && (
+          {roundType === 'race' && (
             <RaceRound
               gameState={gameState}
               role={role}
               sendMessage={sendMessage}
             />
           )}
-          {currentRound.type === 'scattergories' && (
+          {roundType === 'scattergories' && (
             <ScattergoriesRaceRound
               gameState={gameState}
               role={role}
