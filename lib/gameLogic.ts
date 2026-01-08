@@ -56,7 +56,7 @@ export function calculateConfidencePoints(
   guestTyre: TyreType
 ): { host: number; guest: number } {
   const currentRound = rounds[gameState.currentRound];
-  const question = currentRound?.questions[gameState.currentQuestion] as any;
+  const question = currentRound?.questions?.[gameState.currentQuestion] as any;
   
   if (!question || question.type !== 'confidence') {
     return { host: 0, guest: 0 };
