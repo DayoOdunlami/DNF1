@@ -1,6 +1,6 @@
 'use client';
 
-import { useParams, useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import PartySocket from 'partysocket';
 import type { GameRoom, GameMessage, PlayerRole } from '@/lib/types';
@@ -13,13 +13,12 @@ const PARTYKIT_HOST = process.env.NEXT_PUBLIC_PARTYKIT_HOST || 'localhost:1999';
 
 export default function GamePage() {
   const params = useParams();
-  const searchParams = useSearchParams();
   const roomId = params.roomId as string;
-  const role = (searchParams.get('role') || 'guest') as PlayerRole;
   
   const [gameState, setGameState] = useState<GameRoom | null>(null);
   const [socket, setSocket] = useState<PartySocket | null>(null);
   const [connected, setConnected] = useState(false);
+  const [role, setRole] = useState<PlayerRole | null>(null);
 
   useEffect(() => {
     const protocol = PARTYKIT_HOST.includes('localhost') ? 'ws' : 'wss';
@@ -28,6 +27,8 @@ export default function GamePage() {
       room: roomId,
       protocol,
     });
+
+    let determinedRole: PlayerRole | null = null;
 
     ws.onopen = () => {
       setConnected(true);
@@ -42,7 +43,26 @@ export default function GamePage() {
         const message: GameMessage = JSON.parse(event.data);
         
         if (message.type === 'state:update') {
-          setGameState(message.state as GameRoom);
+          const state = message.state as GameRoom;
+          setGameState(state);
+          
+          // Automatically determine role based on who's connected
+          // First person becomes host, second becomes guest
+          if (!determinedRole) {
+            if (!state.players.host.connected) {
+              // No host connected yet, this person becomes host
+              determinedRole = 'host';
+              setRole('host');
+            } else if (!state.players.guest.connected) {
+              // Host exists but no guest, this person becomes guest
+              determinedRole = 'guest';
+              setRole('guest');
+            } else {
+              // Both slots taken, default to guest (room is full)
+              determinedRole = 'guest';
+              setRole('guest');
+            }
+          }
         }
       } catch (error) {
         console.error('Error parsing message:', error);
@@ -71,7 +91,7 @@ export default function GamePage() {
     }
   };
 
-  if (!gameState) {
+  if (!gameState || !role) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">

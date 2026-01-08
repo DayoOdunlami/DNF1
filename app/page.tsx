@@ -8,15 +8,14 @@ export default function Home() {
   const router = useRouter();
   const [roomCode, setRoomCode] = useState('');
 
-  const handleCreateGame = () => {
-    const code = generateRoomCode();
-    router.push(`/game/${code}?role=host`);
+  const handleJoinRoom = () => {
+    const code = roomCode.trim().toUpperCase() || generateRoomCode();
+    // Role will be determined automatically by who joins first
+    router.push(`/game/${code}`);
   };
 
-  const handleJoinGame = () => {
-    if (roomCode.trim()) {
-      router.push(`/game/${roomCode.toUpperCase()}?role=guest`);
-    }
+  const handleGenerateCode = () => {
+    setRoomCode(generateRoomCode());
   };
 
   return (
@@ -33,41 +32,35 @@ export default function Home() {
 
         <div className="bg-dark-card rounded-3xl p-8 md:p-12 border border-white/10 backdrop-blur-sm">
           <div className="space-y-6">
-            <button
-              onClick={handleCreateGame}
-              className="w-full bg-gradient-to-r from-neon-red to-neon-yellow rounded-full py-4 px-8 font-orbitron text-lg font-bold text-white uppercase tracking-wider hover:scale-105 transition-transform shadow-lg hover:shadow-neon-red/50"
-            >
-              Create Game 🏁
-            </button>
-
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-white/20"></div>
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-dark-card text-gray-400 font-rajdhani uppercase tracking-wider">
-                  Or Join Existing Game
-                </span>
-              </div>
-            </div>
-
             <div className="space-y-4">
-              <input
-                type="text"
-                value={roomCode}
-                onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
-                placeholder="Enter room code (e.g., TURBO-7X2K)"
-                className="w-full bg-white/10 border-2 border-white/20 rounded-xl px-6 py-4 font-rajdhani text-lg text-white placeholder-gray-500 focus:outline-none focus:border-neon-blue transition-colors text-center"
-                onKeyPress={(e) => e.key === 'Enter' && handleJoinGame()}
-              />
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={roomCode}
+                  onChange={(e) => setRoomCode(e.target.value.toUpperCase())}
+                  placeholder="Enter or generate room code"
+                  className="flex-1 bg-white/10 border-2 border-white/20 rounded-xl px-6 py-4 font-rajdhani text-lg text-white placeholder-gray-500 focus:outline-none focus:border-neon-blue transition-colors text-center"
+                  onKeyPress={(e) => e.key === 'Enter' && handleJoinRoom()}
+                />
+                <button
+                  onClick={handleGenerateCode}
+                  className="px-4 bg-white/10 border-2 border-white/20 rounded-xl font-rajdhani text-sm text-white hover:bg-white/20 transition-colors"
+                  title="Generate random room code"
+                >
+                  🎲
+                </button>
+              </div>
               <button
-                onClick={handleJoinGame}
-                disabled={!roomCode.trim()}
-                className="w-full bg-transparent border-2 border-neon-blue rounded-full py-4 px-8 font-rajdhani text-lg font-semibold text-neon-blue hover:bg-neon-blue hover:text-dark-bg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                onClick={handleJoinRoom}
+                className="w-full bg-gradient-to-r from-neon-red to-neon-yellow rounded-full py-4 px-8 font-orbitron text-lg font-bold text-white uppercase tracking-wider hover:scale-105 transition-transform shadow-lg hover:shadow-neon-red/50"
               >
-                Join Game 🔵
+                Join Room 🏁
               </button>
             </div>
+
+            <p className="text-gray-400 text-sm font-rajdhani">
+              First person to join becomes Host, second becomes Guest
+            </p>
           </div>
         </div>
 
