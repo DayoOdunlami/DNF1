@@ -121,7 +121,7 @@ export default function GameBoard({ gameState, role, sendMessage }: GameBoardPro
         <PowerupsPanel gameState={gameState} role={role} sendMessage={sendMessage} />
 
         <div className="bg-dark-card rounded-3xl p-6 md:p-8 border border-white/10 mb-6">
-          {roundType === 'mr-mrs' && currentQuestion && (
+          {(roundType as string) === 'mr-mrs' && currentQuestion && (
             <MrMrsRound
               gameState={gameState}
               role={role}
@@ -129,7 +129,7 @@ export default function GameBoard({ gameState, role, sendMessage }: GameBoardPro
               question={currentQuestion as any}
             />
           )}
-          {roundType === 'confidence' && currentQuestion && (
+          {(roundType as string) === 'confidence' && currentQuestion && (
             <ConfidenceRound
               gameState={gameState}
               role={role}
@@ -137,7 +137,7 @@ export default function GameBoard({ gameState, role, sendMessage }: GameBoardPro
               question={currentQuestion as any}
             />
           )}
-          {roundType === 'video' && currentQuestion && (
+          {(roundType as string) === 'video' && currentQuestion && (
             <VideoRound
               gameState={gameState}
               role={role}
@@ -145,14 +145,14 @@ export default function GameBoard({ gameState, role, sendMessage }: GameBoardPro
               question={currentQuestion as any}
             />
           )}
-          {roundType === 'race' && (
+          {(roundType as string) === 'race' && (
             <RaceRound
               gameState={gameState}
               role={role}
               sendMessage={sendMessage}
             />
           )}
-          {roundType === 'scattergories' && (
+          {(roundType as string) === 'scattergories' && (
             <ScattergoriesRaceRound
               gameState={gameState}
               role={role}
